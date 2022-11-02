@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Listing Universities</h1>
+    
+    <a href="{% url "university:create" %}">Add University </a>
+    <hr>
+    <br>
+    <form action="{% url 'university:search' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+    <br>
+    {% for uni in object_list %}
+    
+        <a href="/university/detail/{{uni.id}}">{{uni.name}} {{uni.city}}</a>
+        {% if uni.logo  %}
+        <img class='img-responsive' src="{{ uni.logo.url }}"  width="50" height="60" />
+        {% endif %}
+
+    {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    
+</body>
+</html>
