@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    {% for uni in object_list %}
+    {% for uni in object_list.0 %}
     
         
         <a href="/university/detail/{{uni.id}}">{{uni.name}} {{uni.city}}</a>
